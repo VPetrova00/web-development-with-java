@@ -1,36 +1,56 @@
 package fmi.project.booklibrary.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import fmi.project.booklibrary.model.enums.CoverType;
+import fmi.project.booklibrary.model.enums.Genre;
 
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Table(name="books")
 public class Book {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false)
     private String title;
 
-    private List<String> authors;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "books_authors",
+            joinColumns = { @JoinColumn(name = "book_id") },
+            inverseJoinColumns = { @JoinColumn(name = "author_id") }
+    )
+    private Set<Author> authors;
 
+    @Column
     private String description;
 
+    @Column
     private Double price;
 
+    @Column
     private Integer pages;
 
+    @Column
     private CoverType coverType;
 
-    private String genre;
+    @Column
+    private Genre genre;
 
     public Book() {
         this.title = null;
-        this.authors = new ArrayList<>();
+        this.authors = new HashSet<>();
         this.description = null;
         this.price = 0.0;
         this.pages = 0;
         this.coverType = CoverType.HARD;
-        this.genre = null;
+        this.genre = Genre.OTHER;
     }
 
-    public Book(String title, List<String> authors, Double price, Integer pages, CoverType coverType, String genre) {
+    public Book(String title, Set<Author> authors, Double price, Integer pages, CoverType coverType, Genre genre) {
         this.title = title;
         this.authors = authors;
         this.price = price;
@@ -55,11 +75,11 @@ public class Book {
         this.title = title;
     }
 
-    public List<String> getAuthors() {
+    public Set<Author> getAuthors() {
         return this.authors;
     }
 
-    public void setAuthors(List<String> authors) {
+    public void setAuthors(Set<Author> authors) {
         this.authors = authors;
     }
 
@@ -95,11 +115,11 @@ public class Book {
         this.coverType = coverType;
     }
 
-    public String getGenre() {
+    public Genre getGenre() {
         return this.genre;
     }
 
-    public void setGenre(String genre) {
+    public void setGenre(Genre genre) {
         this.genre = genre;
     }
 }

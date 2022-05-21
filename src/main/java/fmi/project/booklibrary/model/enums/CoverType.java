@@ -1,4 +1,4 @@
-package fmi.project.booklibrary.model;
+package fmi.project.booklibrary.model.enums;
 
 public enum CoverType {
     HARD,
