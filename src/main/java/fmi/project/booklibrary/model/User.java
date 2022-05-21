@@ -1,14 +1,27 @@
 package fmi.project.booklibrary.model;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name="users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String username;
     private String password;
     private String email;
+
+    @ManyToMany
+    @JoinTable(
+            name = "users_books",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "book_id") }
+    )
     private List<Book> allBooks;
+    @ManyToMany
     private List<Book> favouriteBooks;
 
     public User() {

@@ -25,6 +25,9 @@ public class Book {
     )
     private Set<Author> authors;
 
+    @ManyToMany(mappedBy = "allBooks")
+    private Set<User> users;
+
     @Column
     private String description;
 
