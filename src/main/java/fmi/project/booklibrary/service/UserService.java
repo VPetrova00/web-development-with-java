@@ -1,7 +1,7 @@
-package fmi.project.booklibrary.services;
+package fmi.project.booklibrary.service;
 
 import fmi.project.booklibrary.model.User;
-import fmi.project.booklibrary.repositories.IUserRepository;
+import fmi.project.booklibrary.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
