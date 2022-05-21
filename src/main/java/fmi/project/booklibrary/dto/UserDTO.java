@@ -1,5 +1,6 @@
 package fmi.project.booklibrary.dto;
 
+import javax.validation.constraints.NotEmpty;
 import fmi.project.booklibrary.model.User;
 
 public class UserDTO {
