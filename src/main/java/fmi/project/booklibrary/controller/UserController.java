@@ -1,7 +1,7 @@
-package fmi.project.booklibrary.controllers;
+package fmi.project.booklibrary.controller;
 
 import fmi.project.booklibrary.dto.UserDTO;
-import fmi.project.booklibrary.services.UserService;
+import fmi.project.booklibrary.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +16,7 @@ public class UserController {
 
     @GetMapping
     public List<UserDTO> getAlluserDTOs() {
-        return userService.getAllusers()
+        return userService.getAllUsers()
                 .stream()
                 .map(UserDTO::new)
                 .collect(Collectors.toList());
@@ -24,7 +24,7 @@ public class UserController {
 
     @GetMapping(path = "{id}")
     public UserDTO getuserDTO(@PathVariable("id") long id) {
-        return new UserDTO(userService.getuser(id));
+        return new UserDTO(userService.getUser(id));
     }
 
     @PostMapping
@@ -33,12 +33,12 @@ public class UserController {
     }
 
     @PutMapping
-    public void updateuser(@Valid @RequestBody userDTO userDTO) {
-        userService.updateuser(userService.touser(userDTO));
+    public void updateuser(@Valid @RequestBody UserDTO userDTO) {
+        userService.updateUser(userService.toUser(userDTO));
     }
 
     @DeleteMapping(path = "{id}")
     public void deleteuser(@PathVariable("id") long id) {
-        userService.deleteuser(id);
+        userService.deleteUser(id);
     }
 }

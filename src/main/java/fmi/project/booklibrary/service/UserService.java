@@ -1,5 +1,6 @@
 package fmi.project.booklibrary.service;
 
+import fmi.project.booklibrary.dto.UserDTO;
 import fmi.project.booklibrary.model.User;
 import fmi.project.booklibrary.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public List<User> getAllusers() {
+    public List<User> getAllUsers() {
         LinkedList<User> allUsers = new LinkedList<>();
         userRepository.findAll().forEach(allUsers::add);
         return allUsers;
@@ -56,6 +57,16 @@ public class UserService {
 
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    public User toUser(UserDTO dto) {
+        User user = new User();
+
+        user.setUsername(dto.username);
+        user.setPassword(dto.password);
+        user.setEmail(dto.email);
+
+        return user;
     }
 
 }
