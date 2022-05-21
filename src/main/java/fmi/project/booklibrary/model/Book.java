@@ -25,8 +25,21 @@ public class Book {
     )
     private Set<Author> authors;
 
-    @ManyToMany(mappedBy = "allBooks")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "books_users",
+            joinColumns = { @JoinColumn(name = "book_id") },
+            inverseJoinColumns = { @JoinColumn(name = "user_id") }
+    )
     private Set<User> users;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "fav_books_users",
+            joinColumns = { @JoinColumn(name = "fav_book_id") },
+            inverseJoinColumns = { @JoinColumn(name = "user_id") }
+    )
+    private Set<User> usersWithFavBooks;
 
     @Column
     private String description;

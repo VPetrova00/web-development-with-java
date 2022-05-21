@@ -22,7 +22,7 @@ public class User {
     @ManyToMany(mappedBy = "users")
     private Set<Book> allBooks;
 
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(mappedBy = "usersWithFavBooks")
     private Set<Book> favouriteBooks;
 
     public User() {

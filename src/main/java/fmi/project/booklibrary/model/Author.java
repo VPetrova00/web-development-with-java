@@ -1,6 +1,7 @@
 package fmi.project.booklibrary.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "authors")
@@ -17,6 +18,9 @@ public class Author {
 
     @Column(length = 200, nullable = true)
     private String description;
+
+    @ManyToMany(mappedBy = "authors")
+    private Set<Book> books;
 
     public Author() {}
 
