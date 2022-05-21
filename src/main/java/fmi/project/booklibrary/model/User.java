@@ -1,16 +1,29 @@
 package fmi.project.booklibrary.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
+@Entity
+@Table(name="users")
 public class User {
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column(nullable = false)
     private String username;
+
+    @Column
     private String password;
+
+    @Column
     private String email;
-    private List<Book> allBooks;
-    private List<Book> favouriteBooks;
+
+    @ManyToMany(mappedBy = "users")
+    private Set<Book> allBooks;
+
+    @ManyToMany(mappedBy = "users")
+    private Set<Book> favouriteBooks;
 
     public User() {
         this.username = null;
@@ -18,14 +31,14 @@ public class User {
         this.email = null;
     }
 
-    public User(Integer id, String username, String password, String email) {
+    public User(Long id, String username, String password, String email) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -37,11 +50,11 @@ public class User {
         this.email = email;
     }
 
-    public void setBooks(List<Book> books) {
+    public void setBooks(Set<Book> books) {
         this.allBooks = books;
     }
 
-    public int getId() {
+    public long getId() {
         return this.id;
     }
 
@@ -60,15 +73,15 @@ public class User {
         return this.email;
     }
 
-    public List<Book> getAllBooks() {
+    public Set<Book> getAllBooks() {
         return this.allBooks;
     }
 
-    public void setFavouriteBooks(List<Book> favouriteBooks) {
+    public void setFavouriteBooks(Set<Book> favouriteBooks) {
         this.favouriteBooks = favouriteBooks;
     }
 
-    public List<Book> getFavouriteBooks() {
+    public Set<Book> getFavouriteBooks() {
         return this.favouriteBooks;
     }
     //    public void addBook(Book book) {
