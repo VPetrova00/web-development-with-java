@@ -1,4 +1,4 @@
-package fmi.project.booklibrary.repositories;
+package fmi.project.booklibrary.repository;
 
 import fmi.project.booklibrary.model.User;
 import org.springframework.data.repository.CrudRepository;
