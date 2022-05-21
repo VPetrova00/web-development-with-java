@@ -1,75 +1,26 @@
-package fmi.project.booklibrary.model;
+package fmi.project.booklibrary.dto;
 
+import fmi.project.booklibrary.model.Author;
 import fmi.project.booklibrary.model.enums.CoverType;
 import fmi.project.booklibrary.model.enums.Genre;
 
-import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table(name="books")
-public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class BookDto {
     private Long id;
-
-    @Column(nullable = false)
     private String title;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "books_authors",
-            joinColumns = { @JoinColumn(name = "book_id") },
-            inverseJoinColumns = { @JoinColumn(name = "author_id") }
-    )
     private Set<Author> authors;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "books_users",
-            joinColumns = { @JoinColumn(name = "book_id") },
-            inverseJoinColumns = { @JoinColumn(name = "user_id") }
-    )
-    private Set<User> users;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "fav_books_users",
-            joinColumns = { @JoinColumn(name = "fav_book_id") },
-            inverseJoinColumns = { @JoinColumn(name = "user_id") }
-    )
-    private Set<User> usersWithFavBooks;
-
-    @Column
     private String description;
-
-    @Column
     private Double price;
-
-    @Column
     private Integer pages;
-
-    @Column
     private CoverType coverType;
-
-    @Column
     private Genre genre;
 
-    public Book() {
-        this.title = null;
-        this.authors = new HashSet<>();
-        this.description = null;
-        this.price = 0.0;
-        this.pages = 0;
-        this.coverType = CoverType.HARD;
-        this.genre = Genre.OTHER;
-    }
-
-    public Book(Long id, String title, Set<Author> authors, Double price, Integer pages, CoverType coverType, Genre genre) {
+    public BookDto(Long id, String title, Set<Author> authors, String description, Double price, Integer pages, CoverType coverType, Genre genre) {
         this.id = id;
         this.title = title;
         this.authors = authors;
+        this.description = description;
         this.price = price;
         this.pages = pages;
         this.coverType = coverType;
