@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -35,6 +36,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book findById(Long id) {
         return this.bookRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public Set<Book> findAllBooksByAuthorFirstName(String author) {
+        return this.bookRepository.findByAuthorFirstName(author);
     }
 
     @Override

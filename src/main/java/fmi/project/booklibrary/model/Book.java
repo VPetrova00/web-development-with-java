@@ -51,9 +51,11 @@ public class Book {
     private Integer pages;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private CoverType coverType;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private Genre genre;
 
     public Book() {

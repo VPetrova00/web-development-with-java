@@ -5,13 +5,12 @@ import fmi.project.booklibrary.mapper.BookDtoMapper;
 import fmi.project.booklibrary.model.Book;
 import fmi.project.booklibrary.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 @RestController
-@RequestMapping("/library/book")
+@RequestMapping("/library")
 public class BookController {
 
     private BookDtoMapper bookMapper;
@@ -26,8 +25,15 @@ public class BookController {
 
     @GetMapping
     @RequestMapping("/{id}")
-    public BookDto findBookByTitle(@PathVariable Long id) {
+    public BookDto findBookById(@PathVariable Long id) {
         Book resultBook = this.bookService.findById(id);
         return this.bookMapper.convertToDto(resultBook);
+    }
+
+    @GetMapping
+    @RequestMapping("/books/{author}")
+    public Set<BookDto> findBooksByAuthorFirstName(@PathVariable String author) {
+        Set<Book> resultBooks = this.bookService.findAllBooksByAuthorFirstName(author);
+        return this.bookMapper.convertToDtos(resultBooks);
     }
 }

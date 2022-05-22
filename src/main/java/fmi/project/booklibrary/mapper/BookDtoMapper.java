@@ -19,7 +19,8 @@ public class BookDtoMapper {
     }
 
     public Set<BookDto> convertToDtos(Set<Book> books) {
-        return books.stream()
+        return books
+                .stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toSet());
     }
