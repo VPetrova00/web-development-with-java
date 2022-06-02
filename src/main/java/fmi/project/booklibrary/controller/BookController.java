@@ -23,6 +23,20 @@ public class BookController {
         this.bookService = bookService;
     }
 
+    //fix the preservation of existing authors
+    @PostMapping
+    public BookDto addBook(@RequestBody BookDto bookDto) {
+        Book book = this.bookMapper.convertToEntity(bookDto);
+        book = this.bookService.addBook(book);
+        return this.bookMapper.convertToDto(book);
+    }
+
+    @GetMapping
+    public Set<BookDto> findAllBooks() {
+        Set<Book> resultBooks = this.bookService.findAllBooks();
+        return this.bookMapper.convertToDtos(resultBooks);
+    }
+
     @GetMapping
     @RequestMapping("/{id}")
     public BookDto findBookById(@PathVariable Long id) {

@@ -19,8 +19,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book createBook(Book book) {
-        return null;
+    public Book addBook(Book book) {
+        return this.bookRepository.save(book);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> findAllBooks() {
-        return null;
+    public Set<Book> findAllBooks() {
+        return this.bookRepository.findAll();
     }
 }

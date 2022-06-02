@@ -68,10 +68,10 @@ public class Book {
         this.genre = Genre.OTHER;
     }
 
-    public Book(Long id, String title, Set<Author> authors, Double price, Integer pages, CoverType coverType, Genre genre) {
-        this.id = id;
+    public Book(String title, Set<Author> authors, String description, Double price, Integer pages, CoverType coverType, Genre genre) {
         this.title = title;
         this.authors = authors;
+        this.description = description;
         this.price = price;
         this.pages = pages;
         this.coverType = coverType;
