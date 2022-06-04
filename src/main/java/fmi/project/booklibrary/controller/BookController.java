@@ -2,6 +2,7 @@ package fmi.project.booklibrary.controller;
 
 import fmi.project.booklibrary.dto.BookDto;
 import fmi.project.booklibrary.mapper.BookDtoMapper;
+import fmi.project.booklibrary.model.Author;
 import fmi.project.booklibrary.model.Book;
 import fmi.project.booklibrary.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,26 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    //fix the preservation of existing authors
+    //fix the preservation of existing authors and books => update the one form DB
     @PostMapping
     public BookDto addBook(@RequestBody BookDto bookDto) {
         Book book = this.bookMapper.convertToEntity(bookDto);
         book = this.bookService.addBook(book);
         return this.bookMapper.convertToDto(book);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteBook(@PathVariable Long id) {
+        this.bookService.removeBook(id);
+    }
+
+    //fix the preservation of existing authors and books => update the one from the DB
+    @PutMapping
+    public BookDto updateBook(@RequestBody BookDto bookDto) {
+        Book updatedBook = this.bookMapper.convertToEntity(bookDto);
+        updatedBook.setId(bookDto.getId());
+        this.bookService.updateBook(updatedBook);
+        return this.bookMapper.convertToDto(updatedBook);
     }
 
     @GetMapping

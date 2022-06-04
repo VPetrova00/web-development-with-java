@@ -24,13 +24,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void removeBook(Book book) {
-
+    public void removeBook(Long id) {
+        this.bookRepository.deleteById(id);
     }
 
     @Override
     public void updateBook(Book book) {
-
+        this.bookRepository.save(book);
     }
 
     @Override

@@ -7,7 +7,7 @@ import java.util.Set;
 public interface BookService {
     Book addBook(Book book);
 
-    void removeBook(Book book);
+    void removeBook(Long id);
 
     void updateBook(Book book);
 
