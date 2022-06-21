@@ -12,8 +12,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("/library")
 public class UserController {
+
     private UserDtoMapper userMapper;
 
     private UserService userService;
@@ -71,8 +72,8 @@ public class UserController {
     }
 
     @GetMapping
-    @RequestMapping("/books/{author}")
-    public Set<UserDTO> findByUsername(@PathVariable String username) {
+    @RequestMapping("/users/{username}")
+    public Set<UserDTO> findUserByUsername(@PathVariable String username) {
         Set<User> resultUsers = this.userService.findByUsername(username);
         return this.userMapper.convertToDtos(resultUsers);
     }
