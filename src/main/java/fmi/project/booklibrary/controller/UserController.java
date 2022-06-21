@@ -12,8 +12,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("/library")
 public class UserController {
+
     private UserDtoMapper userMapper;
 
     private UserService userService;
