@@ -6,67 +6,26 @@ import fmi.project.booklibrary.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.Set;
 
-@Service
-public class UserService {
-    private static final String messageNotFound = "User is not found.";
+public interface UserService {
+    public String messageNotFound = "User is not found.";
 
-    @Autowired
-    private IUserRepository userRepository;
+    public User addUser(User user);
 
-    public void addUser(User user) {
-        if (userRepository.findByUsername(user.getUsername()).isEmpty()) {
-            throw new IllegalArgumentException(String.format("%s %s already exists.",
-                    user.getUsername()
-            ));
-        }
+    public Set<User> getAllUsers() ;
 
-        userRepository.save(user);
-    }
+    public User getUser(long id);
 
-    public List<User> getAllUsers() {
-        LinkedList<User> allUsers = new LinkedList<>();
-        userRepository.findAll().forEach(allUsers::add);
-        return allUsers;
-    }
+    public void updateUser(User user);
 
-    public User getUser(long id) {
-        return userRepository.findById(id).orElseThrow(() ->
-                new NoSuchElementException(messageNotFound));
-    }
+    public void deleteUser(long id);
 
-    public void updateUser(User user) {
-        if (!userRepository.existsById(user.getId())) {
-            throw new NoSuchElementException(messageNotFound);
-        }
+    public User findById(Long id);
 
-        userRepository.save(user);
-    }
+    public Set<User> findAllBooks();
 
-    public void deleteUser(long id) {
-        if (!userRepository.existsById(id)) {
-            throw new NoSuchElementException(messageNotFound);
-        }
+    public Set<User> findByUsername(String username);
 
-        userRepository.deleteById(id);
-    }
-
-    public Optional<User> findByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
-
-    public User toUser(UserDTO dto) {
-        User user = new User();
-
-        user.setUsername(dto.username);
-        user.setPassword(dto.password);
-        user.setEmail(dto.email);
-
-        return user;
-    }
-
+    public User toUser(UserDTO dto);
 }
