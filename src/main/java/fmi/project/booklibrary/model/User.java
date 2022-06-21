@@ -31,6 +31,14 @@ public class User {
         this.email = null;
     }
 
+    public User(String password, String email, String username, Set<Book> books, Set<Book> favouriteBooks) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.allBooks = books;
+        this.favouriteBooks = favouriteBooks;
+    }
+
     public User(Long id, String username, String password, String email) {
         this.id = id;
         this.username = username;
@@ -42,20 +50,32 @@ public class User {
         this.id = id;
     }
 
+    public long getId() {
+        return this.id;
+    }
+
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPassword() {
+        return this.password;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
+    public String getEmail() {
+        return this.email;
+    }
+
     public void setBooks(Set<Book> books) {
         this.allBooks = books;
     }
 
-    public long getId() {
-        return this.id;
+    public Set<Book> getBooks() {
+        return this.allBooks;
     }
 
     public void setUsername(String username) {
@@ -63,18 +83,6 @@ public class User {
     }
     public String getUsername() {
         return this.username;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public Set<Book> getAllBooks() {
-        return this.allBooks;
     }
 
     public void setFavouriteBooks(Set<Book> favouriteBooks) {
