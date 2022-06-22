@@ -19,11 +19,8 @@ public class User {
     @Column
     private String email;
 
-    @ManyToMany(mappedBy = "users")
-    private Set<Book> allBooks;
-
-    @ManyToMany(mappedBy = "usersWithFavBooks")
-    private Set<Book> favouriteBooks;
+    @OneToMany(mappedBy = "user")
+    private Set<Collection> collections;
 
     public User() {
         this.username = null;
@@ -71,6 +68,7 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
     public String getUsername() {
         return this.username;
     }

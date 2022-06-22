@@ -16,7 +16,6 @@ public class UserDTO {
     @NotEmpty(message = "Email must be entered.")
     public String email;
 
-
     public UserDTO(String password, String email, String username) {
     }
 
@@ -54,6 +53,7 @@ public class UserDTO {
     public void setUsername(String username) {
         this.username = username;
     }
+
     public String getUsername() {
         return this.username;
     }
