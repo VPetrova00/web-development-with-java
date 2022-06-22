@@ -4,6 +4,7 @@ import fmi.project.booklibrary.dto.BookDto;
 import fmi.project.booklibrary.mapper.BookDtoMapper;
 import fmi.project.booklibrary.model.Author;
 import fmi.project.booklibrary.model.Book;
+import fmi.project.booklibrary.model.enums.Genre;
 import fmi.project.booklibrary.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,6 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    //fix the preservation of existing authors
     @PostMapping("/book/add")
     public BookDto addBook(@RequestBody BookDto bookDto) throws IllegalArgumentException {
         Book book = this.bookMapper.convertToEntity(bookDto);
@@ -41,7 +41,6 @@ public class BookController {
         this.bookService.removeBook(id);
     }
 
-    //fix the preservation of existing authors and books => update the one from the DB
     @PutMapping("/book/update")
     public BookDto updateBook(@RequestBody BookDto bookDto) {
         Book updatedBook = this.bookMapper.convertToEntity(bookDto);
@@ -64,9 +63,16 @@ public class BookController {
     }
 
     @GetMapping
-    @RequestMapping("/books/{author}")
+    @RequestMapping("/books/author/{author}")
     public Set<BookDto> findBooksByAuthorFirstName(@PathVariable String author) {
         Set<Book> resultBooks = this.bookService.findAllBooksByAuthorFirstName(author);
+        return this.bookMapper.convertToDtos(resultBooks);
+    }
+
+    @GetMapping
+    @RequestMapping("/books/genre/{genre}")
+    public Set<BookDto> findAllBooksByGenre(@PathVariable Genre genre) {
+        Set<Book> resultBooks = this.bookService.findAllBooksByGenre(genre);
         return this.bookMapper.convertToDtos(resultBooks);
     }
 }
