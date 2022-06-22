@@ -65,10 +65,10 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.findById(id).orElseThrow();
     }
 
-    @Override
-    public Set<User> findAllBooks() {
-        return this.userRepository.findAll();
-    }
+//    @Override
+//    public Set<Book> findAllBooks() {
+//        return this.userRepository.findAll();
+//    }
 
     @Override
     public Set<User> findByUsername(String username) {

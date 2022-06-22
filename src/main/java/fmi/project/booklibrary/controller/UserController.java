@@ -33,24 +33,19 @@ public class UserController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping(path = "{id}")
-    public UserDTO getUserDTO(@PathVariable("id") long id) {
-        return new UserDTO(userService.getUser(id));
-    }
-
-    @PostMapping
+    @PostMapping("/user/add")
     public UserDTO addUser(@RequestBody UserDTO userDTO) {
         User user = this.userMapper.convertToEntity(userDTO);
         user = this.userService.addUser(user);
         return this.userMapper.convertToDto(user);
     }
 
-    @DeleteMapping(path = "{id}")
+    @DeleteMapping(path = "/user/delete/{id}")
     public void deleteUser(@PathVariable("id") long id) {
         userService.deleteUser(id);
     }
 
-    @PutMapping
+    @PutMapping("/user/update")
     public UserDTO updateUser(@RequestBody UserDTO userDTO) {
         User updatedUser = this.userMapper.convertToEntity(userDTO);
         updatedUser.setId(userDTO.getId());
@@ -58,14 +53,14 @@ public class UserController {
         return this.userMapper.convertToDto(updatedUser);
     }
 
-    @GetMapping
-    public Set<UserDTO> findAllBooks() {
-        Set<User> resultUserBooks = this.userService.findAllBooks();
-        return this.userMapper.convertToDtos(resultUserBooks);
+    @GetMapping("/users")
+    public Set<UserDTO> getAllUsers() {
+        Set<User> resultUsers = this.userService.getAllUsers();
+        return this.userMapper.convertToDtos(resultUsers);
     }
 
     @GetMapping
-    @RequestMapping("/{id}")
+    @RequestMapping("/user/{id}")
     public UserDTO findUserById(@PathVariable Long id) {
         User resultUser = this.userService.findById(id);
         return this.userMapper.convertToDto(resultUser);

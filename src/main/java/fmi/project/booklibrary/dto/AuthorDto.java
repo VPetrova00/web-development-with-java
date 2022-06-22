@@ -1,35 +1,27 @@
-package fmi.project.booklibrary.model;
+package fmi.project.booklibrary.dto;
 
-import javax.persistence.*;
-import java.util.Objects;
+import fmi.project.booklibrary.model.Book;
 import java.util.Set;
 
-@Entity
-@Table(name = "authors")
-public class Author {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class AuthorDto {
     private Long id;
 
-    @Column(nullable = false)
     private String firstName;
 
-    @Column(nullable = false)
     private String lastName;
 
-    @Column(length = 200, nullable = true)
     private String description;
 
-    @ManyToMany(mappedBy = "authors")
     private Set<Book> books;
 
-    public Author() {}
-
-    public Author(String firstName, String lastName, String description) {
+    public AuthorDto(Long id, String firstName, String lastName, String description, Set<Book> books) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.description = description;
+        this.books = books;
     }
+
 
     public Long getId() {
         return id;
@@ -64,12 +56,4 @@ public class Author {
     }
 
     public Set<Book> getBooks() { return this.books; }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Author author = (Author) o;
-        return id.equals(author.id) && firstName.equals(author.firstName) && lastName.equals(author.lastName) && description.equals(author.description) && Objects.equals(books, author.books);
-    }
 }
