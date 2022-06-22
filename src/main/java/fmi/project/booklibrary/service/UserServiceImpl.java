@@ -4,11 +4,13 @@ import fmi.project.booklibrary.dto.UserDTO;
 import fmi.project.booklibrary.model.User;
 import fmi.project.booklibrary.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     private final IUserRepository userRepository;
@@ -21,7 +23,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User addUser(User user) {
         if (userRepository.findByUsername(user.getUsername()).isEmpty()) {
-            throw new IllegalArgumentException(String.format("%s %s already exists.",
+            throw new IllegalArgumentException(String.format("%s already exists.",
                     user.getUsername()
             ));
         }
