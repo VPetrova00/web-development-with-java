@@ -1,11 +1,7 @@
 package fmi.project.booklibrary.service;
 
 import fmi.project.booklibrary.dto.UserDTO;
-import fmi.project.booklibrary.model.Book;
 import fmi.project.booklibrary.model.User;
-import fmi.project.booklibrary.repository.IUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
@@ -24,7 +20,7 @@ public interface UserService {
 
     public User findById(Long id);
 
-//    public Set<Book> findAllBooks();
+    public Set<User> findAllUsers();
 
     public Set<User> findByUsername(String username);
 

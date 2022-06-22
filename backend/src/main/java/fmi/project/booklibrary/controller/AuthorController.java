@@ -23,8 +23,8 @@ public class AuthorController {
     }
 
     //fix the preservation of existing authors
-    @PostMapping
-    public AuthorDto addUser(@RequestBody AuthorDto authorDto) throws IllegalArgumentException {
+    @PostMapping("/author/add")
+    public AuthorDto addAuthor(@RequestBody AuthorDto authorDto) throws IllegalArgumentException {
         Author author = this.authorMapper.convertToEntity(authorDto);
         try {
             author = this.authorService.addAuthor(author);

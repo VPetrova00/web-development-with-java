@@ -2,6 +2,7 @@ package fmi.project.booklibrary.service;
 
 import fmi.project.booklibrary.model.Author;
 import fmi.project.booklibrary.model.Book;
+import fmi.project.booklibrary.model.enums.Genre;
 import fmi.project.booklibrary.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,5 +51,10 @@ public class BookServiceImpl implements BookService {
     @Override
     public Set<Book> findAllBooks() {
         return this.bookRepository.findAll();
+    }
+
+    @Override
+    public Set<Book> findAllBooksByGenre(Genre genre) {
+        return this.bookRepository.findAllByGenre(genre);
     }
 }

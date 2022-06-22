@@ -22,13 +22,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User addUser(User user) {
-        if (userRepository.findByUsername(user.getUsername()).isEmpty()) {
+        if (this.userRepository.findByUsername(user.getUsername()).isEmpty()) {
             throw new IllegalArgumentException(String.format("%s already exists.",
                     user.getUsername()
             ));
         }
 
-        return userRepository.save(user);
+        return this.userRepository.save(user);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(long id) {
-        return userRepository.findById(id).orElseThrow(() ->
+        return this.userRepository.findById(id).orElseThrow(() ->
                 new NoSuchElementException(this.messageNotFound));
     }
 
@@ -48,16 +48,16 @@ public class UserServiceImpl implements UserService {
             throw new NoSuchElementException(this.messageNotFound);
         }
 
-        userRepository.save(user);
+        this.userRepository.save(user);
     }
 
     @Override
     public void deleteUser(long id) {
-        if (!userRepository.existsById(id)) {
+        if (!this.userRepository.existsById(id)) {
             throw new NoSuchElementException(this.messageNotFound);
         }
 
-        userRepository.deleteById(id);
+        this.userRepository.deleteById(id);
     }
 
     @Override
@@ -65,14 +65,14 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.findById(id).orElseThrow();
     }
 
-//    @Override
-//    public Set<Book> findAllBooks() {
-//        return this.userRepository.findAll();
-//    }
+    @Override
+    public Set<User> findAllUsers() {
+        return this.userRepository.findAll();
+    }
 
     @Override
     public Set<User> findByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return this.userRepository.findByUsername(username);
     }
 
     @Override

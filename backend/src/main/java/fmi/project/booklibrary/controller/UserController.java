@@ -25,13 +25,18 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
+//    @GetMapping
     public List<UserDTO> getAllUserDTOs() {
         return userService.getAllUsers()
                 .stream()
                 .map(UserDTO::new)
                 .collect(Collectors.toList());
     }
+
+//    @GetMapping(path = "/{id}")
+//    public UserDTO getUserDTO(@PathVariable("id") long id) {
+//        return new UserDTO(userService.getUser(id));
+//    }
 
     @PostMapping("/user/add")
     public UserDTO addUser(@RequestBody UserDTO userDTO) {
@@ -54,8 +59,8 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public Set<UserDTO> getAllUsers() {
-        Set<User> resultUsers = this.userService.getAllUsers();
+    public Set<UserDTO> findAllUsers() {
+        Set<User> resultUsers = this.userService.findAllUsers();
         return this.userMapper.convertToDtos(resultUsers);
     }
 
