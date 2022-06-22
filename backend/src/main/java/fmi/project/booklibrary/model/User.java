@@ -19,11 +19,8 @@ public class User {
     @Column
     private String email;
 
-    @ManyToMany(mappedBy = "users")
-    private Set<Book> allBooks;
-
-    @ManyToMany(mappedBy = "usersWithFavBooks")
-    private Set<Book> favouriteBooks;
+    @OneToMany(mappedBy = "user")
+    private Set<Collection> collections;
 
     public User() {
         this.username = null;
@@ -31,12 +28,10 @@ public class User {
         this.email = null;
     }
 
-    public User(String password, String email, String username, Set<Book> books, Set<Book> favouriteBooks) {
+    public User(String password, String email, String username) {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.allBooks = books;
-        this.favouriteBooks = favouriteBooks;
     }
 
     public User(Long id, String username, String password, String email) {
@@ -70,32 +65,11 @@ public class User {
         return this.email;
     }
 
-    public void setBooks(Set<Book> books) {
-        this.allBooks = books;
-    }
-
-    public Set<Book> getBooks() {
-        return this.allBooks;
-    }
-
     public void setUsername(String username) {
         this.username = username;
     }
+
     public String getUsername() {
         return this.username;
     }
-
-    public void setFavouriteBooks(Set<Book> favouriteBooks) {
-        this.favouriteBooks = favouriteBooks;
-    }
-
-    public Set<Book> getFavouriteBooks() {
-        return this.favouriteBooks;
-    }
-    //    public void addBook(Book book) {
-//        this.books.add(book);
-//    }
-//    public void removeBook(Book book) {
-//        this.books.remove(book);
-//    }
 }

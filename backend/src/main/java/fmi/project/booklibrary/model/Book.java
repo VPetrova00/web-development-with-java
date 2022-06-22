@@ -4,8 +4,8 @@ import fmi.project.booklibrary.model.enums.CoverType;
 import fmi.project.booklibrary.model.enums.Genre;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -26,22 +26,6 @@ public class Book {
     )
     private Set<Author> authors;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "books_users",
-            joinColumns = { @JoinColumn(name = "book_id") },
-            inverseJoinColumns = { @JoinColumn(name = "user_id") }
-    )
-    private Set<User> users;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "fav_books_users",
-            joinColumns = { @JoinColumn(name = "fav_book_id") },
-            inverseJoinColumns = { @JoinColumn(name = "user_id") }
-    )
-    private Set<User> usersWithFavBooks;
-
     @Column
     private String description;
 
@@ -59,6 +43,9 @@ public class Book {
     @Enumerated(EnumType.STRING)
     private Genre genre;
 
+    @ManyToMany(mappedBy = "books")
+    private Set<Collection> collections;
+
     public Book() {
         this.title = null;
         this.authors = new HashSet<>();
@@ -67,6 +54,7 @@ public class Book {
         this.pages = 0;
         this.coverType = CoverType.HARD;
         this.genre = Genre.OTHER;
+        this.collections = new HashSet<>();
     }
 
     public Book(String title, Set<Author> authors, String description, Double price, Integer pages, CoverType coverType, Genre genre) {
@@ -148,6 +136,6 @@ public class Book {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return id.equals(book.id) && title.equals(book.title) && authors.equals(book.authors) && Objects.equals(users, book.users) && Objects.equals(usersWithFavBooks, book.usersWithFavBooks) && description.equals(book.description) && price.equals(book.price) && pages.equals(book.pages) && coverType == book.coverType && genre == book.genre;
+        return id.equals(book.id) && title.equals(book.title) && authors.equals(book.authors) && description.equals(book.description) && price.equals(book.price) && pages.equals(book.pages) && coverType == book.coverType && genre == book.genre;
     }
 }
