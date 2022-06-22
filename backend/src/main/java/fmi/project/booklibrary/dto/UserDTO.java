@@ -2,10 +2,7 @@ package fmi.project.booklibrary.dto;
 
 import javax.validation.constraints.NotEmpty;
 
-import fmi.project.booklibrary.model.Book;
 import fmi.project.booklibrary.model.User;
-
-import java.util.Set;
 
 public class UserDTO {
     public Long id;
@@ -19,11 +16,8 @@ public class UserDTO {
     @NotEmpty(message = "Email must be entered.")
     public String email;
 
-    public Set<Book> allBooks;
 
-    public Set<Book> favouriteBooks;
-
-    public UserDTO(String password, String email, String username, Set<Book> books, Set<Book> favouriteBooks) {
+    public UserDTO(String password, String email, String username) {
     }
 
     public UserDTO(User user) {
@@ -57,14 +51,6 @@ public class UserDTO {
         return this.email;
     }
 
-    public void setBooks(Set<Book> books) {
-        this.allBooks = books;
-    }
-
-    public Set<Book> getBooks() {
-        return this.allBooks;
-    }
-
     public void setUsername(String username) {
         this.username = username;
     }
@@ -72,11 +58,4 @@ public class UserDTO {
         return this.username;
     }
 
-    public void setFavouriteBooks(Set<Book> favouriteBooks) {
-        this.favouriteBooks = favouriteBooks;
-    }
-
-    public Set<Book> getFavouriteBooks() {
-        return this.favouriteBooks;
-    }
 }
