@@ -1,5 +1,6 @@
 package fmi.project.booklibrary.service;
 
+import fmi.project.booklibrary.model.Author;
 import fmi.project.booklibrary.model.Book;
 import fmi.project.booklibrary.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book addBook(Book book) {
+        if (this.bookRepository.existsBookByTitle(book.getTitle())) {
+            throw new IllegalArgumentException("Book already exists in the database");
+        }
         return this.bookRepository.save(book);
     }
 

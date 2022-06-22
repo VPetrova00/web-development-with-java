@@ -24,11 +24,15 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    //fix the preservation of existing authors and books => update the one form DB
+    //fix the preservation of existing authors
     @PostMapping
-    public BookDto addBook(@RequestBody BookDto bookDto) {
+    public BookDto addBook(@RequestBody BookDto bookDto) throws IllegalArgumentException {
         Book book = this.bookMapper.convertToEntity(bookDto);
-        book = this.bookService.addBook(book);
+        try {
+            book = this.bookService.addBook(book);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
         return this.bookMapper.convertToDto(book);
     }
 
