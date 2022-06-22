@@ -2,10 +2,7 @@ package fmi.project.booklibrary.dto;
 
 import javax.validation.constraints.NotEmpty;
 
-import fmi.project.booklibrary.model.Book;
 import fmi.project.booklibrary.model.User;
-
-import java.util.Set;
 
 public class UserDTO {
     public Long id;
@@ -60,4 +57,5 @@ public class UserDTO {
     public String getUsername() {
         return this.username;
     }
+
 }
