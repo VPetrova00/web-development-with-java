@@ -5,6 +5,7 @@ import fmi.project.booklibrary.model.enums.Genre;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -140,5 +141,13 @@ public class Book {
 
     public void setGenre(Genre genre) {
         this.genre = genre;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return id.equals(book.id) && title.equals(book.title) && authors.equals(book.authors) && Objects.equals(users, book.users) && Objects.equals(usersWithFavBooks, book.usersWithFavBooks) && description.equals(book.description) && price.equals(book.price) && pages.equals(book.pages) && coverType == book.coverType && genre == book.genre;
     }
 }

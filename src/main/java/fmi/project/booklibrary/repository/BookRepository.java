@@ -1,5 +1,6 @@
 package fmi.project.booklibrary.repository;
 
+import fmi.project.booklibrary.model.Author;
 import fmi.project.booklibrary.model.Book;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -11,6 +12,8 @@ import java.util.Set;
 
 @Repository
 public interface BookRepository extends CrudRepository<Book, Long> {
+    Boolean existsBookByTitle(String title);
+
     Set<Book> findAll();
 
     @Query(

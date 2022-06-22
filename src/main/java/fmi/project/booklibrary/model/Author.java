@@ -1,6 +1,7 @@
 package fmi.project.booklibrary.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -60,5 +61,13 @@ public class Author {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Author author = (Author) o;
+        return id.equals(author.id) && firstName.equals(author.firstName) && lastName.equals(author.lastName) && description.equals(author.description) && Objects.equals(books, author.books);
     }
 }
