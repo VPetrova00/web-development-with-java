@@ -25,7 +25,7 @@ public class BookController {
     }
 
     //fix the preservation of existing authors
-    @PostMapping
+    @PostMapping("/book/add")
     public BookDto addBook(@RequestBody BookDto bookDto) throws IllegalArgumentException {
         Book book = this.bookMapper.convertToEntity(bookDto);
         try {
@@ -36,13 +36,13 @@ public class BookController {
         return this.bookMapper.convertToDto(book);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("book/delete/{id}")
     public void deleteBook(@PathVariable Long id) {
         this.bookService.removeBook(id);
     }
 
     //fix the preservation of existing authors and books => update the one from the DB
-    @PutMapping
+    @PutMapping("/book/update")
     public BookDto updateBook(@RequestBody BookDto bookDto) {
         Book updatedBook = this.bookMapper.convertToEntity(bookDto);
         updatedBook.setId(bookDto.getId());
@@ -50,14 +50,14 @@ public class BookController {
         return this.bookMapper.convertToDto(updatedBook);
     }
 
-    @GetMapping
+    @GetMapping("/books")
     public Set<BookDto> findAllBooks() {
         Set<Book> resultBooks = this.bookService.findAllBooks();
         return this.bookMapper.convertToDtos(resultBooks);
     }
 
     @GetMapping
-    @RequestMapping("/{id}")
+    @RequestMapping("/book/{id}")
     public BookDto findBookById(@PathVariable Long id) {
         Book resultBook = this.bookService.findById(id);
         return this.bookMapper.convertToDto(resultBook);
