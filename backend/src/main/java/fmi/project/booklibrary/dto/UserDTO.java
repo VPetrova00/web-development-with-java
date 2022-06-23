@@ -2,8 +2,6 @@ package fmi.project.booklibrary.dto;
 
 import javax.validation.constraints.NotEmpty;
 
-import fmi.project.booklibrary.model.User;
-
 public class UserDTO {
     public Long id;
 
@@ -16,18 +14,18 @@ public class UserDTO {
     @NotEmpty(message = "Email must be entered.")
     public String email;
 
-    public UserDTO(User user) {
-        this.id = user.getId();
-        this.username = user.getUsername();
-        this.password = user.getPassword();
-        this.email = user.getEmail();
+    public UserDTO(Long id, String username, String password, String email) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public long getId() {
+    public Long getId() {
         return this.id;
     }
 

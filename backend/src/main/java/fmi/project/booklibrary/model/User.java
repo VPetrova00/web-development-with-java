@@ -17,7 +17,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -27,7 +27,7 @@ public class User {
         this.username = null;
         this.password = null;
         this.email = null;
-        collections = new HashSet<>();
+        this.collections = new HashSet<>();
     }
 
     public User(Long id, String username, String password, String email) {
@@ -41,7 +41,7 @@ public class User {
         this.id = id;
     }
 
-    public long getId() {
+    public Long getId() {
         return this.id;
     }
 

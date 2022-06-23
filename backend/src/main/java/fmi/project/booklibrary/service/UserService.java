@@ -6,21 +6,18 @@ import fmi.project.booklibrary.model.User;
 import java.util.Set;
 
 public interface UserService {
-    public String messageNotFound = "User is not found.";
 
-    public User addUser(User user);
+    User addUser(User user);
 
-    public Set<User> getAllUsers() ;
+    void updateUser(User user);
 
-    public User getUser(long id);
+    void deleteUser(long id);
 
-    public void updateUser(User user);
+    User findById(Long id);
 
-    public void deleteUser(long id);
+    Set<User> findAllUsers();
 
-    public User findById(Long id);
+    Set<User> findByUsername(String username);
 
-    public Set<User> findAllUsers();
-
-    public Set<User> findByUsername(String username);
+    User findUserByEmail(String email);
 }

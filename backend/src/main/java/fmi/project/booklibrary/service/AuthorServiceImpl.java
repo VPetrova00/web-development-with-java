@@ -1,6 +1,7 @@
 package fmi.project.booklibrary.service;
 
 import fmi.project.booklibrary.exception.ResourceAlreadyExists;
+import fmi.project.booklibrary.exception.ResourceNotFound;
 import fmi.project.booklibrary.model.Author;
 import fmi.project.booklibrary.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +29,19 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public void removeAuthor(Long id) {
+        if (!this.authorRepository.existsById(id)) {
+            throw new ResourceNotFound("The author isn't existent in the database.");
+        }
+
         this.authorRepository.deleteById(id);
     }
 
     @Override
     public void updateAuthor(Author author) {
+        if (!this.authorRepository.existsById(author.getId())) {
+            throw new ResourceNotFound(String.format("The author %s isn't existent in the database.", author.getFirstName()));
+        }
+
         this.authorRepository.save(author);
     }
 

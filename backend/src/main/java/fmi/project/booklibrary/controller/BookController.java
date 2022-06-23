@@ -28,12 +28,7 @@ public class BookController {
     @PostMapping("/book/add")
     public BookDto addBook(@RequestBody BookDto bookDto) {
         Book book = this.bookMapper.convertToEntity(bookDto);
-        try {
-            book = this.bookService.addBook(book);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
+        book = this.bookService.addBook(book);
         return this.bookMapper.convertToDto(book);
     }
 

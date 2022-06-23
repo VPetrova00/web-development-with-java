@@ -1,6 +1,8 @@
 package fmi.project.booklibrary.service;
 
 import fmi.project.booklibrary.dto.UserDTO;
+import fmi.project.booklibrary.exception.ResourceAlreadyExists;
+import fmi.project.booklibrary.exception.ResourceNotFound;
 import fmi.project.booklibrary.model.User;
 import fmi.project.booklibrary.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,30 +23,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User addUser(User user) {
-        if (this.userRepository.findByUsername(user.getUsername()).isEmpty()) {
-            throw new IllegalArgumentException(String.format("%s already exists.",
-                    user.getUsername()
-            ));
+        if (this.userRepository.existsUserByEmail(user.getEmail())) {
+            throw new ResourceAlreadyExists(String.format("User with this email %s already exists in the database.",
+                    user.getEmail()));
         }
 
         return this.userRepository.save(user);
     }
 
     @Override
-    public Set<User> getAllUsers() {
-        return this.userRepository.findAll();
-    }
-
-    @Override
-    public User getUser(long id) {
-        return this.userRepository.findById(id).orElseThrow(() ->
-                new NoSuchElementException(this.messageNotFound));
-    }
-
-    @Override
     public void updateUser(User user) {
-        if (!userRepository.existsById(user.getId())) {
-            throw new NoSuchElementException(this.messageNotFound);
+        if (!this.userRepository.existsById(user.getId())) {
+            throw new ResourceNotFound(String.format("The user %s isn't existent in the database.", user.getEmail()));
         }
 
         this.userRepository.save(user);
@@ -53,7 +43,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(long id) {
         if (!this.userRepository.existsById(id)) {
-            throw new NoSuchElementException(this.messageNotFound);
+            throw new ResourceNotFound("The user isn't existent in the database.");
         }
 
         this.userRepository.deleteById(id);
@@ -72,5 +62,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Set<User> findByUsername(String username) {
         return this.userRepository.findByUsername(username);
+    }
+
+    @Override
+    public User findUserByEmail(String email) {
+        return this.userRepository.findUserByEmail(email);
     }
 }
