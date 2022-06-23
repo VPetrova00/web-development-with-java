@@ -1,6 +1,7 @@
 package fmi.project.booklibrary.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -13,25 +14,20 @@ public class User {
     @Column(nullable = false)
     private String username;
 
-    @Column
+    @Column(nullable = false)
     private String password;
 
-    @Column
+    @Column(nullable = false)
     private String email;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Collection> collections;
 
     public User() {
         this.username = null;
         this.password = null;
         this.email = null;
-    }
-
-    public User(String password, String email, String username) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
+        collections = new HashSet<>();
     }
 
     public User(Long id, String username, String password, String email) {
@@ -73,4 +69,11 @@ public class User {
         return this.username;
     }
 
+    public Set<Collection> getCollections() {
+        return this.collections;
+    }
+
+    public void setCollections(Set<Collection> collections) {
+        this.collections = collections;
+    }
 }

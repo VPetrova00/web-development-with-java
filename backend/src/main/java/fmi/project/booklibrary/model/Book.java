@@ -6,6 +6,7 @@ import fmi.project.booklibrary.model.enums.Genre;
 import javax.persistence.*;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -26,7 +27,7 @@ public class Book {
     )
     private Set<Author> authors;
 
-    @Column
+    @Column(length = 200)
     private String description;
 
     @Column
@@ -57,7 +58,8 @@ public class Book {
         this.collections = new HashSet<>();
     }
 
-    public Book(String title, Set<Author> authors, String description, Double price, Integer pages, CoverType coverType, Genre genre) {
+    public Book(Long id, String title, Set<Author> authors, String description, Double price, Integer pages, CoverType coverType, Genre genre) {
+        this.id = id;
         this.title = title;
         this.authors = authors;
         this.description = description;
@@ -131,11 +133,24 @@ public class Book {
         this.genre = genre;
     }
 
+    public Set<Collection> getCollections() {
+        return this.collections;
+    }
+
+    public void setCollections(Set<Collection> collections) {
+        this.collections = collections;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return id.equals(book.id) && title.equals(book.title) && authors.equals(book.authors) && description.equals(book.description) && price.equals(book.price) && pages.equals(book.pages) && coverType == book.coverType && genre == book.genre;
+        return title.equals(book.title) && authors.equals(book.authors) && description.equals(book.description) && price.equals(book.price) && pages.equals(book.pages) && coverType == book.coverType && genre == book.genre;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, authors, description, price, pages, coverType, genre);
     }
 }

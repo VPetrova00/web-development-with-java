@@ -23,6 +23,4 @@ public interface UserService {
     public Set<User> findAllUsers();
 
     public Set<User> findByUsername(String username);
-
-    public User toUser(UserDTO dto);
 }

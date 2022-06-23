@@ -16,13 +16,10 @@ public class UserDTO {
     @NotEmpty(message = "Email must be entered.")
     public String email;
 
-    public UserDTO(String password, String email, String username) {
-    }
-
     public UserDTO(User user) {
+        this.id = user.getId();
         this.username = user.getUsername();
         this.password = user.getPassword();
-        this.id = user.getId();
         this.email = user.getEmail();
     }
 
@@ -57,5 +54,4 @@ public class UserDTO {
     public String getUsername() {
         return this.username;
     }
-
 }

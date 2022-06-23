@@ -2,21 +2,20 @@ package fmi.project.booklibrary.service;
 
 import fmi.project.booklibrary.dto.UserDTO;
 import fmi.project.booklibrary.model.User;
-import fmi.project.booklibrary.repository.IUserRepository;
+import fmi.project.booklibrary.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final IUserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public UserServiceImpl(IUserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -73,16 +72,5 @@ public class UserServiceImpl implements UserService {
     @Override
     public Set<User> findByUsername(String username) {
         return this.userRepository.findByUsername(username);
-    }
-
-    @Override
-    public User toUser(UserDTO dto) {
-        User user = new User();
-
-        user.setUsername(dto.username);
-        user.setPassword(dto.password);
-        user.setEmail(dto.email);
-
-        return user;
     }
 }
