@@ -1,9 +1,6 @@
 package fmi.project.booklibrary.dto;
 
-import fmi.project.booklibrary.model.Book;
 import fmi.project.booklibrary.model.User;
-
-import java.util.Set;
 
 public class CollectionDto {
     Long id;

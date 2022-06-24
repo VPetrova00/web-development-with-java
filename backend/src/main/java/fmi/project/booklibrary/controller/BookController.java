@@ -15,9 +15,9 @@ import java.util.Set;
 @RequestMapping("/library")
 public class BookController {
 
-    private BookDtoMapper bookMapper;
+    private final BookDtoMapper bookMapper;
 
-    private BookService bookService;
+    private final BookService bookService;
 
     @Autowired
     public BookController(BookDtoMapper bookMapper, BookService bookService) {

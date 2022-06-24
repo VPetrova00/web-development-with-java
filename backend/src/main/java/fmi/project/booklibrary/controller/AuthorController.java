@@ -12,9 +12,9 @@ import java.util.Set;
 @RestController
 @RequestMapping("/library")
 public class AuthorController {
-    private AuthorDtoMapper authorMapper;
+    private final AuthorDtoMapper authorMapper;
 
-    private AuthorService authorService;
+    private final AuthorService authorService;
 
     @Autowired
     public AuthorController(AuthorDtoMapper authorMapper, AuthorService authorService) {
