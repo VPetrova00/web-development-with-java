@@ -18,6 +18,4 @@ public interface UserService {
     Set<User> findAllUsers();
 
     Set<User> findByUsername(String username);
-
-    User findUserByEmail(String email);
 }

@@ -13,9 +13,9 @@ import java.util.Set;
 @RequestMapping("/library")
 public class UserController {
 
-    private UserDtoMapper userMapper;
+    private final UserDtoMapper userMapper;
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public UserController(UserDtoMapper userMapper, UserService userService) {
@@ -61,12 +61,5 @@ public class UserController {
     public Set<UserDTO> findUsersByUsername(@PathVariable String username) {
         Set<User> resultUsers = this.userService.findByUsername(username);
         return this.userMapper.convertToDtos(resultUsers);
-    }
-
-    @GetMapping
-    @RequestMapping("/users/email/")
-    public UserDTO findUserByEmail(@RequestParam String email) {
-        User resUser = this.userService.findUserByEmail(email);
-        return this.userMapper.convertToDto(resUser);
     }
 }

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class UserDtoMapper {
 
     public User convertToEntity(UserDTO userDto) {
-        return new User(userDto.getId(), userDto.getPassword(), userDto.getEmail(), userDto.getUsername());
+        return new User(userDto.getId(), userDto.getUsername(), userDto.getPassword(), userDto.getEmail());
     }
 
     public UserDTO convertToDto(User user) {
