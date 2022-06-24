@@ -5,10 +5,12 @@ import fmi.project.booklibrary.exception.ResourceNotFound;
 import fmi.project.booklibrary.model.Author;
 import fmi.project.booklibrary.model.Book;
 import fmi.project.booklibrary.model.enums.Genre;
+import fmi.project.booklibrary.repository.AuthorRepository;
 import fmi.project.booklibrary.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -17,9 +19,12 @@ public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
 
+    private final AuthorRepository authorRepository;
+
     @Autowired
-    public BookServiceImpl(BookRepository bookRepository) {
+    public BookServiceImpl(BookRepository bookRepository, AuthorRepository authorRepository) {
         this.bookRepository = bookRepository;
+        this.authorRepository = authorRepository;
     }
 
     @Override
@@ -28,6 +33,14 @@ public class BookServiceImpl implements BookService {
             throw new ResourceAlreadyExists(String.format("Book %s with description - %s - is existent in the database", book.getTitle(), book.getDescription()));
         }
 
+        Set<Author> newAuthors = new HashSet<>();
+        for (Author author : book.getAuthors()) {
+            if (!this.authorRepository.existsAuthorByFirstNameAndDescription(author.getFirstName(), author.getDescription())) {
+                newAuthors.add(author);
+            }
+        }
+
+        book.setAuthors(newAuthors);
         return this.bookRepository.save(book);
     }
 
