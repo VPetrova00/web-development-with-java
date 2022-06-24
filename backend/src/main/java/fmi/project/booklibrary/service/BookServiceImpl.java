@@ -27,6 +27,7 @@ public class BookServiceImpl implements BookService {
         if (this.bookRepository.existsBookByTitle(book.getTitle())) {
             throw new ResourceAlreadyExists(String.format("Book %s with description - %s - is existent in the database", book.getTitle(), book.getDescription()));
         }
+
         return this.bookRepository.save(book);
     }
 
