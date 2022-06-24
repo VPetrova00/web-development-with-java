@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @Component
 public class AuthorDtoMapper {
     public Author convertToEntity(AuthorDto authorDto) {
-        return new Author(authorDto.getFirstName(), authorDto.getLastName(), authorDto.getDescription());
+        return new Author(authorDto.getId(), authorDto.getFirstName(), authorDto.getLastName(), authorDto.getDescription());
     }
 
     public AuthorDto convertToDto(Author author) {

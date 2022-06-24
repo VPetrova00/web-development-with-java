@@ -1,6 +1,7 @@
 package fmi.project.booklibrary.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -17,15 +18,21 @@ public class Author {
     @Column(nullable = false)
     private String lastName;
 
-    @Column(length = 200, nullable = true)
+    @Column(nullable = false)
     private String description;
 
     @ManyToMany(mappedBy = "authors")
     private Set<Book> books;
 
-    public Author() {}
+    public Author() {
+        this.firstName = null;
+        this.lastName = null;
+        this.description = null;
+        this.books = new HashSet<>();
+    }
 
-    public Author(String firstName, String lastName, String description) {
+    public Author(Long id, String firstName, String lastName, String description) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.description = description;
@@ -70,6 +77,6 @@ public class Author {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Author author = (Author) o;
-        return id.equals(author.id) && firstName.equals(author.firstName) && lastName.equals(author.lastName) && description.equals(author.description) && Objects.equals(books, author.books);
+        return firstName.equals(author.firstName) && lastName.equals(author.lastName) && description.equals(author.description);
     }
 }

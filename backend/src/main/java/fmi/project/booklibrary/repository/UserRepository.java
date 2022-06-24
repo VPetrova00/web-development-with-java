@@ -7,8 +7,12 @@ import org.springframework.stereotype.Repository;
 import java.util.Set;
 
 @Repository
-public interface IUserRepository extends CrudRepository<User, Long> {
+public interface UserRepository extends CrudRepository<User, Long> {
     Set<User> findAll();
 
     Set<User> findByUsername(String username);
+
+    User findUserByEmail(String email);
+
+    Boolean existsUserByEmail(String email);
 }

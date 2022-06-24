@@ -1,5 +1,7 @@
 package fmi.project.booklibrary.service;
 
+import fmi.project.booklibrary.exception.ResourceAlreadyExists;
+import fmi.project.booklibrary.exception.ResourceNotFound;
 import fmi.project.booklibrary.model.Author;
 import fmi.project.booklibrary.model.Book;
 import fmi.project.booklibrary.model.enums.Genre;
@@ -23,18 +25,27 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book addBook(Book book) {
         if (this.bookRepository.existsBookByTitle(book.getTitle())) {
-            throw new IllegalArgumentException("Book already exists in the database");
+            throw new ResourceAlreadyExists(String.format("Book %s with description - %s - is existent in the database", book.getTitle(), book.getDescription()));
         }
+
         return this.bookRepository.save(book);
     }
 
     @Override
     public void removeBook(Long id) {
+        if (!this.bookRepository.existsById(id)) {
+            throw new ResourceNotFound("The book isn't existent in the database.");
+        }
+
         this.bookRepository.deleteById(id);
     }
 
     @Override
     public void updateBook(Book book) {
+        if (!this.bookRepository.existsById(book.getId())) {
+            throw new ResourceNotFound(String.format("The book %s isn't existent in the database.", book.getTitle()));
+        }
+
         this.bookRepository.save(book);
     }
 

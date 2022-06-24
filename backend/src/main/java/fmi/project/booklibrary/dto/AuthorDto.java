@@ -22,7 +22,6 @@ public class AuthorDto {
         this.books = books;
     }
 
-
     public Long getId() {
         return id;
     }
@@ -56,4 +55,8 @@ public class AuthorDto {
     }
 
     public Set<Book> getBooks() { return this.books; }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
 }

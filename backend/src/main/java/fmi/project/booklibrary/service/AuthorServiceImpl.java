@@ -1,15 +1,16 @@
 package fmi.project.booklibrary.service;
 
+import fmi.project.booklibrary.exception.ResourceAlreadyExists;
+import fmi.project.booklibrary.exception.ResourceNotFound;
 import fmi.project.booklibrary.model.Author;
 import fmi.project.booklibrary.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Set;
 
 @Service
-public class AuthorServiceImpl implements AuthorService{
+public class AuthorServiceImpl implements AuthorService {
 
     private final AuthorRepository authorRepository;
 
@@ -20,37 +21,48 @@ public class AuthorServiceImpl implements AuthorService{
 
     @Override
     public Author addAuthor(Author author) {
-        return null;
+        if (this.authorRepository.existsAuthorByFirstNameAndDescription(author.getFirstName(), author.getDescription())) {
+            throw new ResourceAlreadyExists(String.format("Author %s is existent in the database", author.getFirstName()));
+        }
+        return this.authorRepository.save(author);
     }
 
     @Override
     public void removeAuthor(Long id) {
+        if (!this.authorRepository.existsById(id)) {
+            throw new ResourceNotFound("The author isn't existent in the database.");
+        }
+
         this.authorRepository.deleteById(id);
     }
 
     @Override
     public void updateAuthor(Author author) {
+        if (!this.authorRepository.existsById(author.getId())) {
+            throw new ResourceNotFound(String.format("The author %s isn't existent in the database.", author.getFirstName()));
+        }
+
         this.authorRepository.save(author);
     }
 
     @Override
-    public Author findById(Long id) {
+    public Author findAuthorById(Long id) {
         return this.authorRepository.findById(id).orElseThrow();
     }
 
     @Override
-    public Set<Author> findAllByFirstName(String firstName) {
+    public Set<Author> findAuthorsByFirstName(String firstName) {
         return this.authorRepository.findAllByFirstName(firstName);
     }
 
     @Override
-    public Set<Author> findAllByLastName(String lastName) {
+    public Set<Author> findAuthorsByLastName(String lastName) {
         return this.authorRepository.findAllByLastName(lastName);
     }
 
     @Override
-    public Set<Author> findAuthorByFirstNameAndLastName(String firstName, String lastName) {
-        return this.authorRepository.findAuthorByFirstNameAndLastName(firstName, lastName);
+    public Set<Author> findAuthorsByFirstNameAndLastName(String firstName, String lastName) {
+        return this.authorRepository.findAuthorsByFirstNameAndLastName(firstName, lastName);
     }
 
     @Override

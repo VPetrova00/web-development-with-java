@@ -1,6 +1,7 @@
 package fmi.project.booklibrary.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -10,10 +11,11 @@ public class Collection {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     String collectionName;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     User user;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -65,5 +67,18 @@ public class Collection {
 
     public void setBooks(Set<Book> books) {
         this.books = books;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Collection that = (Collection) o;
+        return collectionName.equals(that.collectionName) && user.equals(that.user);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(collectionName, user);
     }
 }

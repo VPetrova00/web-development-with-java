@@ -9,12 +9,13 @@ import java.util.stream.Collectors;
 
 @Component
 public class UserDtoMapper {
+
     public User convertToEntity(UserDTO userDto) {
-        return new User(userDto.getPassword(), userDto.getEmail(), userDto.getUsername());
+        return new User(userDto.getId(), userDto.getPassword(), userDto.getEmail(), userDto.getUsername());
     }
 
     public UserDTO convertToDto(User user) {
-        return new UserDTO(user.getPassword(), user.getEmail(), user.getUsername());
+        return new UserDTO(user.getId(), user.getUsername(), user.getPassword(), user.getEmail());
     }
 
     public Set<UserDTO> convertToDtos(Set<User> users) {

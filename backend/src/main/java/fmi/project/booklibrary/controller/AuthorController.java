@@ -22,25 +22,19 @@ public class AuthorController {
         this.authorService = authorService;
     }
 
-    //fix the preservation of existing authors
     @PostMapping("/author/add")
-    public AuthorDto addAuthor(@RequestBody AuthorDto authorDto) throws IllegalArgumentException {
+    public AuthorDto addAuthor(@RequestBody AuthorDto authorDto) {
         Author author = this.authorMapper.convertToEntity(authorDto);
-        try {
-            author = this.authorService.addAuthor(author);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        author = this.authorService.addAuthor(author);
         return this.authorMapper.convertToDto(author);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/author/delete/{id}")
     public void deleteAuthor(@PathVariable Long id) {
         this.authorService.removeAuthor(id);
     }
 
-    //fix the preservation of existing authors => update the one from the DB
-    @PutMapping
+    @PutMapping("/author/update")
     public AuthorDto updateAuthor(@RequestBody AuthorDto authorDto) {
         Author updatedAuthor = this.authorMapper.convertToEntity(authorDto);
         updatedAuthor.setId(authorDto.getId());
@@ -48,38 +42,36 @@ public class AuthorController {
         return this.authorMapper.convertToDto(updatedAuthor);
     }
 
-    @GetMapping
+    @GetMapping("/authors")
     public Set<AuthorDto> findAllAuthors() {
         Set<Author> resultAuthors = this.authorService.findAllAuthors();
         return this.authorMapper.convertToDtos(resultAuthors);
     }
 
     @GetMapping
-    @RequestMapping("/author/{id}")
+    @RequestMapping("/author/id/{id}")
     public AuthorDto findAuthorById(@PathVariable Long id) {
-        Author resultAuthor = this.authorService.findById(id);
+        Author resultAuthor = this.authorService.findAuthorById(id);
         return this.authorMapper.convertToDto(resultAuthor);
     }
 
     @GetMapping
-    @RequestMapping("/author/{firstName}")
+    @RequestMapping("/authors/firstName/{firstName}")
     public Set<AuthorDto> findAllByFirstName(@PathVariable String firstName) {
-        Set<Author> resultAuthor = this.authorService.findAllByFirstName(firstName);
+        Set<Author> resultAuthor = this.authorService.findAuthorsByFirstName(firstName);
         return this.authorMapper.convertToDtos(resultAuthor);
     }
     @GetMapping
-    @RequestMapping("/author/{lastName}")
+    @RequestMapping("/authors/lastName/{lastName}")
     public Set<AuthorDto> findAllByLastName(@PathVariable String lastName) {
-        Set<Author> resultAuthor = this.authorService.findAllByLastName(lastName);
+        Set<Author> resultAuthor = this.authorService.findAuthorsByLastName(lastName);
         return this.authorMapper.convertToDtos(resultAuthor);
     }
 
     @GetMapping
-    @RequestMapping("/author/{firstName}/{lastName}")
+    @RequestMapping("/authors/names/{firstName}/{lastName}")
     public Set<AuthorDto> findAuthorByFirstNameAndLastName(@PathVariable String firstName, @PathVariable String lastName) {
-        Set<Author> resultAuthor = this.authorService.findAuthorByFirstNameAndLastName(firstName, lastName);
+        Set<Author> resultAuthor = this.authorService.findAuthorsByFirstNameAndLastName(firstName, lastName);
         return this.authorMapper.convertToDtos(resultAuthor);
     }
-
-
 }
