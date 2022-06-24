@@ -1,5 +1,7 @@
 package fmi.project.booklibrary.model;
 
+import fmi.project.booklibrary.exception.ResourceNotFound;
+
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
@@ -67,6 +69,18 @@ public class Collection {
 
     public void setBooks(Set<Book> books) {
         this.books = books;
+    }
+
+    public void addBook(Book book) {
+        this.books.add(book);
+    }
+
+    public void removeBook(Book book) {
+        if (!this.books.contains(book)) {
+              throw new ResourceNotFound("This collection doesn't contain the specified book.");
+        }
+
+        this.books.remove(book);
     }
 
     @Override

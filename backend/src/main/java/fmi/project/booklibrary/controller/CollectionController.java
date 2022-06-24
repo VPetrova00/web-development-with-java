@@ -2,8 +2,10 @@ package fmi.project.booklibrary.controller;
 
 import fmi.project.booklibrary.dto.CollectionDto;
 import fmi.project.booklibrary.mapper.CollectionDtoMapper;
+import fmi.project.booklibrary.model.Book;
 import fmi.project.booklibrary.model.Collection;
 import fmi.project.booklibrary.model.User;
+import fmi.project.booklibrary.service.BookService;
 import fmi.project.booklibrary.service.CollectionService;
 import fmi.project.booklibrary.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +23,14 @@ public class CollectionController {
 
     private final UserService userService;
 
+    private final BookService bookService;
+
     @Autowired
-    public CollectionController(CollectionService collectionService, CollectionDtoMapper collectionMapper, UserService userService) {
+    public CollectionController(CollectionService collectionService, CollectionDtoMapper collectionMapper, UserService userService, BookService bookService) {
         this.collectionService = collectionService;
         this.collectionMapper = collectionMapper;
         this.userService = userService;
+        this.bookService = bookService;
     }
 
     @PostMapping
@@ -77,5 +82,20 @@ public class CollectionController {
         return this.collectionMapper.convertToDto(
                 this.collectionService.findCollectionByCollectionName(collectionName)
         );
+    }
+
+    @PostMapping("/{collectionName}/add/book/{bookId}")
+    public void addBookInCollection(@PathVariable Long bookId, @PathVariable String collectionName) {
+        Collection collection = this.collectionService.findCollectionByCollectionName(collectionName);
+        collection.addBook(this.bookService.findById(bookId));
+        this.collectionService.updateCollection(collection);
+    }
+
+    @DeleteMapping("/{collectionName}/remove/book/{bookId}")
+    public void removeBookFromCollection(@PathVariable Long bookId, @PathVariable String collectionName) {
+        Collection collection = this.collectionService.findCollectionByCollectionName(collectionName);
+        Book book = this.bookService.findById(bookId);
+        collection.removeBook(book);
+        this.collectionService.updateCollection(collection);
     }
 }
