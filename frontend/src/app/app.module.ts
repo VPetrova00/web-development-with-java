@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+import { LoggedOutNavBarComponent } from './logged-out-nav-bar/logged-out-nav-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationBarComponent
+    LoggedOutNavBarComponent
   ],
   imports: [
     BrowserModule
