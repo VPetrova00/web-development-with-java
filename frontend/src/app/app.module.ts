@@ -14,6 +14,9 @@ import {AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {UserService} from "./services/user.service";
 import {HomeComponent} from "./pages/homePage/home.component";
+import { ListComponent } from './list/list.component';
+import { AllBooksComponent } from './all-books/all-books.component';
+import {Ng2SearchPipeModule} from "ng2-search-filter";
 
 @NgModule({
   declarations: [
@@ -25,14 +28,17 @@ import {HomeComponent} from "./pages/homePage/home.component";
     UserComponent,
     LibraryComponent,
     LoginFormComponent,
-    HomeComponent
+    HomeComponent,
+    ListComponent,
+    AllBooksComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

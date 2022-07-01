@@ -15,7 +15,7 @@ export class BookComponent implements OnInit {
   price!: number;
   pages!: number;
   authors: [] = [];
-  isbn: string = '';
+  ISBN: string = '';
 
 
   constructor() { }
