@@ -35,11 +35,8 @@ export class LoginFormComponent implements OnInit {
       this.users.forEach((user: UserInterface) => {
         if (user.email === data.email && user.password === data.password) {
           sessionStorage.setItem('isLoggedIn', 'true');
-          console.log("Hello, " + user.username);
           this.router.navigate(['home']);
-        }
-        else {
-          sessionStorage.clear();
+          return;
         }
       });
     }
