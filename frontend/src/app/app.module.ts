@@ -23,7 +23,7 @@ import {HomeComponent} from "./pages/homePage/home.component";
     FooterComponent,
     BookComponent,
     UserComponent,
-    LibraryComponent
+    LibraryComponent,
     LoginFormComponent,
     HomeComponent
   ],
