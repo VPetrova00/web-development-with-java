@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Login Form</h2>
+  <h2 class="h2">Login Form</h2>
   <form
     [formGroup]="loginForm"
   >
@@ -33,7 +33,10 @@
       >
 
       <button
+        type="button"
         (click)="login(loginForm.value)"
+        class="btn btn-primary submit"
+        [disabled]="!loginForm.valid"
       >Login</button>
     </div>
   </form>

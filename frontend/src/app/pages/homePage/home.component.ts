@@ -7,6 +7,7 @@ import {Component, OnInit} from "@angular/core";
 })
 export class HomeComponent implements OnInit{
   title = 'frontend';
+  public isUserLogged = sessionStorage.getItem('isLoggedIn');
 
   ngOnInit(): void {
   }

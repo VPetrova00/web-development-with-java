@@ -14,6 +14,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {UserService} from "./services/user.service";
 import {HomeComponent} from "./pages/homePage/home.component";
+import {RegistrationFormComponent} from "./forms/registrationForm/registration-form.component";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {HomeComponent} from "./pages/homePage/home.component";
     UserComponent,
     LibraryComponent,
     LoginFormComponent,
-    HomeComponent
+    HomeComponent,
+    RegistrationFormComponent,
   ],
   imports: [
     BrowserModule,
