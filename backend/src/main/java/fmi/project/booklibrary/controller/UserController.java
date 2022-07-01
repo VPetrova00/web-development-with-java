@@ -23,6 +23,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/user/add")
     public UserDTO addUser(@RequestBody UserDTO userDTO) {
         User user = this.userMapper.convertToEntity(userDTO);
@@ -30,11 +31,13 @@ public class UserController {
         return this.userMapper.convertToDto(user);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping(path = "/user/delete/{id}")
     public void deleteUser(@PathVariable("id") long id) {
         this.userService.deleteUser(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("/user/update")
     public UserDTO updateUser(@RequestBody UserDTO userDTO) {
         User updatedUser = this.userMapper.convertToEntity(userDTO);
@@ -50,6 +53,7 @@ public class UserController {
         return this.userMapper.convertToDtos(resultUsers);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     @RequestMapping("/user/id/{id}")
     public UserDTO findUserById(@PathVariable Long id) {
@@ -57,6 +61,7 @@ public class UserController {
         return this.userMapper.convertToDto(resultUser);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     @RequestMapping("/users/username/{username}")
     public Set<UserDTO> findUsersByUsername(@PathVariable String username) {
