@@ -10,6 +10,7 @@ import {FormBuilder, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {UserService} from "./services/user.service";
+import {HomeComponent} from "./pages/homePage/home.component";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {UserService} from "./services/user.service";
     LoggedOutNavBarComponent,
     LoggedInNavBarComponent,
     FooterComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
