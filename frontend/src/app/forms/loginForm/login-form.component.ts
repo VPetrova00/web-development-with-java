@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { UserService } from "../../services/user.service";
-import {User} from "../../models/user.model";
+import {UserInterface} from "../../models/user.model";
 
 @Component({
   selector: 'login-form',
@@ -11,7 +11,7 @@ import {User} from "../../models/user.model";
 })
 export class LoginFormComponent implements OnInit {
   public loginForm: any = FormGroup;
-  public users: User[] = [];
+  public users: UserInterface[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,7 +32,7 @@ export class LoginFormComponent implements OnInit {
 
   login(data: any) {
     if (data) {
-      this.users.forEach((user: User) => {
+      this.users.forEach((user: UserInterface) => {
         if (user.email === data.email && user.password === data.password) {
           sessionStorage.setItem('isLoggedIn', 'true');
           console.log("Hello, " + user.username);
