@@ -43,6 +43,7 @@ public class UserController {
         return this.userMapper.convertToDto(updatedUser);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/users")
     public Set<UserDTO> findAllUsers() {
         Set<User> resultUsers = this.userService.findAllUsers();

@@ -8,6 +8,12 @@ import { FooterComponent } from './footer/footer.component';
 import { BookComponent } from './book/book.component';
 import { UserComponent } from './user/user.component';
 import { LibraryComponent } from './library/library.component';
+import {LoginFormComponent} from "./forms/loginForm/login-form.component";
+import {FormBuilder, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {AppRoutingModule} from "./app-routing.module";
+import {HttpClientModule} from "@angular/common/http";
+import {UserService} from "./services/user.service";
+import {HomeComponent} from "./pages/homePage/home.component";
 
 @NgModule({
   declarations: [
@@ -18,9 +24,15 @@ import { LibraryComponent } from './library/library.component';
     BookComponent,
     UserComponent,
     LibraryComponent
+    LoginFormComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
