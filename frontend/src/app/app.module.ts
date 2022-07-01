@@ -5,6 +5,9 @@ import { AppComponent } from './app.component';
 import { LoggedOutNavBarComponent } from './logged-out-nav-bar/logged-out-nav-bar.component';
 import { LoggedInNavBarComponent } from './logged-in-nav-bar/logged-in-nav-bar.component';
 import { FooterComponent } from './footer/footer.component';
+import { BookComponent } from './book/book.component';
+import { UserComponent } from './user/user.component';
+import { LibraryComponent } from './library/library.component';
 import {LoginFormComponent} from "./forms/loginForm/login-form.component";
 import {FormBuilder, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AppRoutingModule} from "./app-routing.module";
@@ -18,6 +21,9 @@ import {HomeComponent} from "./pages/homePage/home.component";
     LoggedOutNavBarComponent,
     LoggedInNavBarComponent,
     FooterComponent,
+    BookComponent,
+    UserComponent,
+    LibraryComponent
     LoginFormComponent,
     HomeComponent
   ],
