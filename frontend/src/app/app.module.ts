@@ -17,6 +17,8 @@ import { ListComponent } from './list/list.component';
 import { AllBooksComponent } from './all-books/all-books.component';
 import {Ng2SearchPipeModule} from "ng2-search-filter";
 import {RegistrationFormComponent} from "./forms/registrationForm/registration-form.component";
+import {RegistrationComponent} from "./pages/registrationPage/registration.component";
+import {LoginComponent} from "./pages/loginPage/login.component";
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import {RegistrationFormComponent} from "./forms/registrationForm/registration-f
     ListComponent,
     AllBooksComponent,
     RegistrationFormComponent,
+    RegistrationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
