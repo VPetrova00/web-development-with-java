@@ -7,7 +7,6 @@ import { LoggedInNavBarComponent } from './logged-in-nav-bar/logged-in-nav-bar.c
 import { FooterComponent } from './footer/footer.component';
 import { BookComponent } from './book/book.component';
 import { UserComponent } from './user/user.component';
-import { LibraryComponent } from './library/library.component';
 import {LoginFormComponent} from "./forms/loginForm/login-form.component";
 import {FormBuilder, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AppRoutingModule} from "./app-routing.module";
@@ -24,7 +23,6 @@ import {RegistrationFormComponent} from "./forms/registrationForm/registration-f
     FooterComponent,
     BookComponent,
     UserComponent,
-    LibraryComponent,
     LoginFormComponent,
     HomeComponent,
     RegistrationFormComponent,
