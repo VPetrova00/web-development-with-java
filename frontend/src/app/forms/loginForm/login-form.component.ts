@@ -26,22 +26,20 @@ export class LoginFormComponent implements OnInit {
     });
 
     this.userService.getAllUsers().subscribe((data: any) => {
-      console.log(data)
       this.users = data;
-      console.log(this.users);
     });
   }
 
   login(data: any) {
-    console.log(data);
-    if (data.email) {
+    if (data) {
       this.users.forEach((user: User) => {
         if (user.email === data.email && user.password === data.password) {
-          localStorage.setItem('isLoggedIn', 'true');
+          sessionStorage.setItem('isLoggedIn', 'true');
+          console.log("Hello, " + user.username);
           this.router.navigate(['home']);
         }
         else {
-          localStorage.clear();
+          sessionStorage.clear();
         }
       });
     }

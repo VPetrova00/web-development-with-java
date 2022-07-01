@@ -1,4 +1,7 @@
-<logged-out-nav-bar></logged-out-nav-bar>
+<logged-out-nav-bar *ngIf="!isUserLogged; else logged"></logged-out-nav-bar>
+<ng-template #logged>
+  <logged-in-nav-bar></logged-in-nav-bar>
+</ng-template>
 <div class="d-flex justify-content-center space">
   <h1>Welcome to Book Library!</h1>
 </div>
