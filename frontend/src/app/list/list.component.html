@@ -1,0 +1,10 @@
+<div class="search-hero">
+  <input type="text" name="search" [(ngModel)]="searchText" placeholder="Search a list by name">
+</div>
+
+<div class="books">
+  <div *ngFor="let book of books | filter:searchText">
+    <book id="{{book.id}}"></book>
+  </div>
+  <button>Remove from list</button>
+</div>

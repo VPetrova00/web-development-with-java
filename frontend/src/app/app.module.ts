@@ -13,6 +13,9 @@ import {AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {UserService} from "./services/user.service";
 import {HomeComponent} from "./pages/homePage/home.component";
+import { ListComponent } from './list/list.component';
+import { AllBooksComponent } from './all-books/all-books.component';
+import {Ng2SearchPipeModule} from "ng2-search-filter";
 import {RegistrationFormComponent} from "./forms/registrationForm/registration-form.component";
 
 @NgModule({
@@ -25,6 +28,8 @@ import {RegistrationFormComponent} from "./forms/registrationForm/registration-f
     UserComponent,
     LoginFormComponent,
     HomeComponent,
+    ListComponent,
+    AllBooksComponent,
     RegistrationFormComponent,
   ],
   imports: [
@@ -32,7 +37,8 @@ import {RegistrationFormComponent} from "./forms/registrationForm/registration-f
     ReactiveFormsModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
