@@ -25,6 +25,7 @@ public class BookController {
         this.bookService = bookService;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/book/add")
     public BookDto addBook(@RequestBody BookDto bookDto) {
         Book book = this.bookMapper.convertToEntity(bookDto);
@@ -32,11 +33,13 @@ public class BookController {
         return this.bookMapper.convertToDto(book);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("book/delete/{id}")
     public void deleteBook(@PathVariable Long id) {
         this.bookService.removeBook(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("/book/update")
     public BookDto updateBook(@RequestBody BookDto bookDto) {
         Book updatedBook = this.bookMapper.convertToEntity(bookDto);
@@ -45,12 +48,14 @@ public class BookController {
         return this.bookMapper.convertToDto(updatedBook);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/books")
     public Set<BookDto> findAllBooks() {
         Set<Book> resultBooks = this.bookService.findAllBooks();
         return this.bookMapper.convertToDtos(resultBooks);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     @RequestMapping("/book/{id}")
     public BookDto findBookById(@PathVariable Long id) {
@@ -58,6 +63,7 @@ public class BookController {
         return this.bookMapper.convertToDto(resultBook);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     @RequestMapping("/books/author/{author}")
     public Set<BookDto> findBooksByAuthorFirstName(@PathVariable String author) {
@@ -65,6 +71,7 @@ public class BookController {
         return this.bookMapper.convertToDtos(resultBooks);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     @RequestMapping("/books/genre/{genre}")
     public Set<BookDto> findAllBooksByGenre(@PathVariable Genre genre) {

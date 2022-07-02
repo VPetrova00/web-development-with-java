@@ -22,6 +22,7 @@ public class AuthorController {
         this.authorService = authorService;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/author/add")
     public AuthorDto addAuthor(@RequestBody AuthorDto authorDto) {
         Author author = this.authorMapper.convertToEntity(authorDto);
@@ -29,11 +30,13 @@ public class AuthorController {
         return this.authorMapper.convertToDto(author);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("/author/delete/{id}")
     public void deleteAuthor(@PathVariable Long id) {
         this.authorService.removeAuthor(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("/author/update")
     public AuthorDto updateAuthor(@RequestBody AuthorDto authorDto) {
         Author updatedAuthor = this.authorMapper.convertToEntity(authorDto);
@@ -42,12 +45,14 @@ public class AuthorController {
         return this.authorMapper.convertToDto(updatedAuthor);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/authors")
     public Set<AuthorDto> findAllAuthors() {
         Set<Author> resultAuthors = this.authorService.findAllAuthors();
         return this.authorMapper.convertToDtos(resultAuthors);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     @RequestMapping("/author/id/{id}")
     public AuthorDto findAuthorById(@PathVariable Long id) {
@@ -55,12 +60,15 @@ public class AuthorController {
         return this.authorMapper.convertToDto(resultAuthor);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     @RequestMapping("/authors/firstName/{firstName}")
     public Set<AuthorDto> findAllByFirstName(@PathVariable String firstName) {
         Set<Author> resultAuthor = this.authorService.findAuthorsByFirstName(firstName);
         return this.authorMapper.convertToDtos(resultAuthor);
     }
+
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     @RequestMapping("/authors/lastName/{lastName}")
     public Set<AuthorDto> findAllByLastName(@PathVariable String lastName) {
@@ -68,6 +76,7 @@ public class AuthorController {
         return this.authorMapper.convertToDtos(resultAuthor);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     @RequestMapping("/authors/names/{firstName}/{lastName}")
     public Set<AuthorDto> findAuthorByFirstNameAndLastName(@PathVariable String firstName, @PathVariable String lastName) {
