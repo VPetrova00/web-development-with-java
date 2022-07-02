@@ -1,1 +1,25 @@
-<p>user works!</p>
+<logged-in-nav-bar></logged-in-nav-bar>
+<div class="container">
+  <h2 class="h2">My Profile</h2>
+  <form [formGroup]="profileForm">
+    <div class="form-group">
+      <label
+        for="username"
+      >
+        Current username:
+      </label>
+      <input type="text" [placeholder]="user?.username" id="username" name="username" formControlName="username">
+    </div>
+
+    <div class="form-group">
+      <label
+        for="username"
+      >
+        Current password:
+      </label>
+      <input type="text" [placeholder]="user?.password" id="password" name="password" formControlName="password">
+    </div>
+    <button class="btn btn-primary submit" (click)="updateUser(profileForm.value)">Update</button>
+  </form>
+</div>
+<footer></footer>

@@ -18,7 +18,6 @@ export class AuthorService {
     return this.http.get(this.getAllAuthorsUrl);
   }
 
-  //after subscribe the returned data can be manipulated
   addAuthor(author: AuthorInterface): void {
     this.http.post<AuthorInterface>(this.addAuthorUrl, author).subscribe();
   }
