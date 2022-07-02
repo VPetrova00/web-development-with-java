@@ -8,14 +8,14 @@ import {BookInterface} from "../models/book.model";
 export class BookService {
   getAllBooksUrl: string = "http://localhost:8080/library/books";
   // getBooksFromCollectionUrl: string = "http://localhost:8080/library/books/collection_id";
-  addBookUrl: string = "http://localhost:8080/library/book/add"
+  addBookUrl: string = "http://localhost:8080/library/book/add";
 
   constructor(
     private http: HttpClient
   ) {}
 
   getAllBooks() {
-    return this.http.get(this.getAllBooksUrl);
+    return this.http.get<any>(this.getAllBooksUrl);
   }
 
   // getBooksFromCollection() {

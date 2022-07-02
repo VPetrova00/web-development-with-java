@@ -4,7 +4,19 @@
 
 <div class="books">
   <div *ngFor="let book of books | filter:searchText">
-    <book id="{{book.id}}"></book>
+    <img src="assets/images/blue-book-11533032160df0ztycm4w.png" />
+    <h5>{{book.title}}</h5>
+    <p>{{book.description}}</p>
+    <p>Id: {{book.id}}</p>
+    <p>Genre: {{book.genre}}</p>
+    <p>Cover type: {{book.coverType}}</p>
+    <div>
+      Authors:
+      <p *ngFor="let author of books.authors">{{author}}</p>
+    </div>
+    <p>Pages: {{book.pages}}</p>
+    <p>Price: {{book.price}}</p>
+
   </div>
   <button>Add to list</button>
 </div>
