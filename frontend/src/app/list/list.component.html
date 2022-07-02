@@ -4,7 +4,7 @@
 
 <div class="books">
   <div *ngFor="let book of books | filter:searchText">
-    <book id="{{book.id}}"></book>
+    <book [id]=book.id></book>
   </div>
   <button>Remove from list</button>
 </div>

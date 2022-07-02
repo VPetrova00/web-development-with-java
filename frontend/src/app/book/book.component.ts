@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Genre} from "../models/enums/Genre";
 import {CoverType} from "../models/enums/CoverType";
+import {BookService} from "../services/book.service";
 
 @Component({
   selector: 'book',
@@ -15,12 +16,14 @@ export class BookComponent implements OnInit {
   price!: number;
   pages!: number;
   authors: [] = [];
-  ISBN: string = '';
+  @Input() id!: number;
 
 
-  constructor() { }
+  constructor(private bookService: BookService) {
+  }
 
   ngOnInit(): void {
+
   }
 
 }
