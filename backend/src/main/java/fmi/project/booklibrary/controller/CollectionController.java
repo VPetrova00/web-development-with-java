@@ -33,6 +33,7 @@ public class CollectionController {
         this.bookService = bookService;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping
     @RequestMapping("/collection/add")
     public CollectionDto addCollection(@RequestBody CollectionDto collectionDto) {
@@ -41,12 +42,14 @@ public class CollectionController {
         return this.collectionMapper.convertToDto(collection);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping
     @RequestMapping("/collection/delete/{id}")
     public void deleteCollection(@PathVariable Long id) {
         this.collectionService.removeCollection(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping
     @RequestMapping("/collection/update")
     public CollectionDto updateCollection(@RequestBody CollectionDto collectionDto) {
@@ -61,6 +64,7 @@ public class CollectionController {
         return this.collectionMapper.convertToDto(collection);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     @RequestMapping("/all")
     public Set<CollectionDto> findAllCollections() {
@@ -68,6 +72,7 @@ public class CollectionController {
         return this.collectionMapper.convertToDtos(collections);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     @RequestMapping("/collection/id/{id}")
     public CollectionDto findCollectionById(@PathVariable Long id) {
@@ -76,6 +81,7 @@ public class CollectionController {
         );
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     @RequestMapping("/collection/name/{collectionName}")
     public CollectionDto findCollectionByCollectionName(@PathVariable String collectionName) {
@@ -84,6 +90,7 @@ public class CollectionController {
         );
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/{collectionName}/add/book/{bookId}")
     public void addBookInCollection(@PathVariable Long bookId, @PathVariable String collectionName) {
         Collection collection = this.collectionService.findCollectionByCollectionName(collectionName);
@@ -91,6 +98,7 @@ public class CollectionController {
         this.collectionService.updateCollection(collection);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("/{collectionName}/remove/book/{bookId}")
     public void removeBookFromCollection(@PathVariable Long bookId, @PathVariable String collectionName) {
         Collection collection = this.collectionService.findCollectionByCollectionName(collectionName);
