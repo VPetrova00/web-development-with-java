@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Genre} from "../utils/Genre";
-import {CoverType} from "../utils/CoverType";
+import {Genre} from "../models/enums/Genre";
+import {CoverType} from "../models/enums/CoverType";
 
 @Component({
   selector: 'book',
