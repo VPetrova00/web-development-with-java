@@ -20,7 +20,6 @@ export class UserService {
     return this.http.get<any>(this.getAllUsersUrl);
   }
 
-  //after subscribe the returned data can be manipulated
   addUser(user: UserInterface): void {
     this.http.post<UserInterface>(this.addUserUrl, user).subscribe();
   }
